@@ -19,6 +19,7 @@
     body {
       background: #faf9f6;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
@@ -31,9 +32,57 @@
       height: min(266px, 38vw, 45vh);
       width: auto;
     }
+
+    .contact {
+      margin-top: clamp(20px, 4vh, 40px);
+      text-align: center;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #3a3a3a;
+      max-width: 100%;
+    }
+
+    .contact p {
+      margin: 0 0 12px;
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    }
+
+    .contact a {
+      display: inline-block;
+      padding: 10px 22px;
+      border: 1.5px solid #1a1a1a;
+      border-radius: 999px;
+      color: #1a1a1a;
+      text-decoration: none;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      overflow-wrap: anywhere;
+      transition: background-color 0.15s, color 0.15s;
+    }
+
+    .contact a[hidden] {
+      display: none;
+    }
+
+    .contact a:hover,
+    .contact a:focus-visible {
+      background: #1a1a1a;
+      color: #faf9f6;
+    }
   </style>
 </head>
 <body>
   <img src="runbot.png" alt="dashagentic" width="625" height="1044">
+  <div class="contact">
+    <p>Get in touch</p>
+    <a id="contact-email" hidden></a>
+    <noscript>hello [at] dashagentic [dot] ai</noscript>
+  </div>
+  <script>
+    // Assemble the address at runtime so it never appears verbatim in the source.
+    const email = ['hello', 'dashagentic.ai'].join('@');
+    const link = document.getElementById('contact-email');
+    link.href = 'mailto:' + email;
+    link.textContent = email;
+    link.hidden = false;
+  </script>
 </body>
 </html>
